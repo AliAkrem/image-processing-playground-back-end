@@ -61,12 +61,22 @@ flask run
 
 ## API Endpoints
 
-Document your API endpoints here, for example:
-
-- `POST /api/add-gaussian-noise` - add gaussian noise to specific image.
-- `POST /api/gaussian_filter ` - filter image using gaussian filter
-
-
+```base
+Endpoint                       Methods  Rule                          
+-----------------------------  -------  ------------------------------
+api.health_check               GET      /api/health             
+api.add_gaussian_noise         POST     /api/add-gaussian-noise       
+api.add_slat_and_pepper_noise  POST     /api/add-salt-and-pepper-noise
+api.average_filter             POST     /api/average_filter           
+api.enhance_image_v1           POST     /api/enhance_v1               
+api.enhance_image_v2           POST     /api/enhance_v2               
+api.gaussian_filter            POST     /api/gaussian_filter                
+api.max_filter                 POST     /api/max_filter               
+api.median_filter              POST     /api/median_filter            
+api.min_filter                 POST     /api/min_filter               
+api.nagao_filter               POST     /api/nagao_filter             
+api.prewitt_edge_detection     POST     /api/prewitt_edge_detection  
+```
 ## Development
 
 To contribute to this project:
