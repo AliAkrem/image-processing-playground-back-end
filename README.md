@@ -63,7 +63,7 @@ flask run
 
 Document your API endpoints here, for example:
 
-- `POST /api/add-gaussian-noise` - add gaussian nose to spesific image.
+- `POST /api/add-gaussian-noise` - add gaussian noise to specific image.
 - `POST /api/gaussian_filter ` - filter image using gaussian filter
 
 
