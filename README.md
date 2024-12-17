@@ -32,7 +32,7 @@ brew install octave
 
 1. Clone the repository
 ```bash
-git clone [https://github.com/AliAkrem/image-processing-playground-back-end](https://github.com/AliAkrem/image-processing-playground-back-end)
+git clone https://github.com/AliAkrem/image-processing-playground-back-end
 cd image-processing-playground-back-end
 ```
 
