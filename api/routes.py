@@ -608,3 +608,62 @@ def prewitt_edge_detection():
     except Exception as e:
         print(f"Error details: {str(e)}")  # For debugging
         return jsonify({"error": str(e)}), 500
+    
+
+
+@api.route('/laplacian_edge_detection', methods=['POST'])
+def laplacian_edge_detection():
+    try:
+        # Check if the file part is present
+        if 'image' not in request.files:
+            return jsonify({"error": "No image file provided"}), 400
+
+        
+        s = request.form.get('s', 20,  type=int)
+
+        # Retrieve the file
+        file = request.files['image']
+        
+        # Ensure the file has a valid extension
+        if file.filename.split('.')[-1].lower() not in ['png', 'jpg', 'jpeg', 'tif']:
+            return jsonify({"error": "Unsupported file type"}), 400
+        
+
+
+
+        # Open the image file
+        img = Image.open(file)
+        
+        # Convert to grayscale if not already
+        if img.mode != 'L':
+            img = img.convert('L')
+            
+
+        # Convert to numpy array
+        img_array = np.array(img)
+        
+        # Process with Octave
+        eng = OctaveEngineManager.get_engine()
+        
+        # Process grayscale image
+        img_array_list = img_array.tolist()
+        processed_img = np.array(eng.laplacian_edge_detection(img_array_list, s))
+
+        # Convert to uint8 format (values should already be in 0-255 range)
+        processed_img = processed_img.astype(np.uint8)
+
+        # Convert back to image format
+        output = Image.fromarray(processed_img, mode='L')
+        buffered = BytesIO()
+        output.save(buffered, format="PNG")
+        img_str = base64.b64encode(buffered.getvalue()).decode()
+
+        return jsonify({
+            "success": True,
+            "processed_image": f"data:image/png;base64,{img_str}"
+        })
+
+    except Exception as e:
+        print(f"Error details: {str(e)}")  # For debugging
+        return jsonify({"error": str(e)}), 500
+
